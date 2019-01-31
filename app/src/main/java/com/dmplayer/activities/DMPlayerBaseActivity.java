@@ -19,8 +19,8 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -58,7 +58,6 @@ import com.dmplayer.models.DrawerItem;
 import com.dmplayer.models.SongDetail;
 import com.dmplayer.phonemidea.DMPlayerUtility;
 import com.dmplayer.recyclerviewutils.ItemClickSupport;
-import com.dmplayer.slidinguppanelhelper.SlidingUpPanelLayout;
 import com.dmplayer.uicomponent.PlayPauseView;
 import com.dmplayer.uicomponent.Slider;
 import com.dmplayer.utility.LogWriter;
@@ -68,6 +67,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class DMPlayerBaseActivity extends ActionBarActivity implements View.OnClickListener, Slider.OnValueChangedListener,
+public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnClickListener, Slider.OnValueChangedListener,
         NotificationManager.NotificationCenterDelegate {
 
     private static final String TAG = "ActivityDMPlayerBase";
@@ -485,7 +485,7 @@ public class DMPlayerBaseActivity extends ActionBarActivity implements View.OnCl
 
         MediaController.getInstance().shuffleList(MusicPreferance.playlist);
 
-        mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 Log.i(TAG, "onPanelSlide, offset " + slideOffset);
@@ -514,6 +514,17 @@ public class DMPlayerBaseActivity extends ActionBarActivity implements View.OnCl
             }
 
             @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                    Log.i(TAG, "onPanelExpanded");
+                    isExpand = true;
+                } else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                    Log.i(TAG, "onPanelCollapsed");
+                    isExpand = false;
+                }
+            }
+
+            /*@Override
             public void onPanelExpanded(View panel) {
                 Log.i(TAG, "onPanelExpanded");
                 isExpand = true;
@@ -533,7 +544,7 @@ public class DMPlayerBaseActivity extends ActionBarActivity implements View.OnCl
             @Override
             public void onPanelHidden(View panel) {
                 Log.i(TAG, "onPanelHidden");
-            }
+            }*/
         });
 
     }

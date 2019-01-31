@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
-public class MusicChooserActivity extends ActionBarActivity {
+public class MusicChooserActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private int color = 0xFFFFFF;
@@ -95,7 +95,7 @@ public class MusicChooserActivity extends ActionBarActivity {
                 mAllSongsListAdapter.notifyDataSetChanged();
             }
         });
-        mPhoneMediaControl.loadMusicList(context, -1, PhoneMediaControl.SonLoadFor.All,"");
+        mPhoneMediaControl.loadMusicList(context, -1, PhoneMediaControl.SonLoadFor.All, "");
     }
 
     public class AllSongsListAdapter extends BaseAdapter {

@@ -13,7 +13,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,11 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.dmplayer.R;
@@ -41,7 +39,6 @@ import com.dmplayer.observablelib.ScrollState;
 import com.dmplayer.observablelib.ScrollUtils;
 import com.dmplayer.phonemidea.DMPlayerUtility;
 import com.dmplayer.phonemidea.PhoneMediaControl;
-import com.dmplayer.slidinguppanelhelper.SlidingUpPanelLayout;
 import com.dmplayer.uicomponent.ExpandableHeightListView;
 import com.dmplayer.uicomponent.PlayPauseView;
 import com.dmplayer.uicomponent.Slider;
@@ -53,13 +50,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AlbumAndArtisDetailsActivity extends ActionBarActivity implements View.OnClickListener, ObservableScrollViewCallbacks, Slider.OnValueChangedListener,
+public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements View.OnClickListener, ObservableScrollViewCallbacks, Slider.OnValueChangedListener,
         NotificationManager.NotificationCenterDelegate {
 
     private View mToolbarView;
@@ -568,7 +566,7 @@ public class AlbumAndArtisDetailsActivity extends ActionBarActivity implements V
         MediaController.getInstance().repeatMode = imgbtn_suffel.isSelected() ? 1 : 0;
         DMPlayerUtility.changeColorSet(context, (ImageView) imgbtn_suffel, imgbtn_suffel.isSelected());
 
-        mLayout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 Log.i(TAG, "onPanelSlide, offset " + slideOffset);
@@ -597,6 +595,17 @@ public class AlbumAndArtisDetailsActivity extends ActionBarActivity implements V
             }
 
             @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                    Log.i(TAG, "onPanelExpanded");
+                    isExpand = true;
+                } else if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                    Log.i(TAG, "onPanelCollapsed");
+                    isExpand = false;
+                }
+            }
+
+            /*@Override
             public void onPanelExpanded(View panel) {
                 Log.i(TAG, "onPanelExpanded");
                 isExpand = true;
@@ -616,7 +625,7 @@ public class AlbumAndArtisDetailsActivity extends ActionBarActivity implements V
             @Override
             public void onPanelHidden(View panel) {
                 Log.i(TAG, "onPanelHidden");
-            }
+            }*/
         });
 
     }
