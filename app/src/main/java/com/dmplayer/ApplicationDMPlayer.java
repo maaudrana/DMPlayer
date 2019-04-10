@@ -5,8 +5,6 @@
  */
 package com.dmplayer;
 
-import java.util.ArrayList;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -22,8 +20,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
-public class ApplicationDMPlayer extends Application {
+import java.util.ArrayList;
 
+//TODO add base master
+//TODO add admob
+//TODO string
+public class ApplicationDMPlayer extends Application {
     public ArrayList<SongDetail> songsList = new ArrayList<SongDetail>();
     public static Context applicationContext = null;
     public static volatile Handler applicationHandler = null;
@@ -43,14 +45,14 @@ public class ApplicationDMPlayer extends Application {
         initilizeDB();
         /*
          * Display Density Calculation so that Application not problem with All
-		 * resolution.
-		 */
+         * resolution.
+         */
         checkDisplaySize();
         density = applicationContext.getResources().getDisplayMetrics().density;
 
-		/*
+        /*
          * Imageloader initialize
-		 */
+         */
         initImageLoader(applicationContext);
     }
 

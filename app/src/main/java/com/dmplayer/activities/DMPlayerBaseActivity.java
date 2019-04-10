@@ -584,7 +584,7 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
                 toolbar.setTitle("Settings");
                 break;
 
-            case 4:
+            /*case 4:
                 sharedPreferences.edit().putInt("FRAGMENT", position).apply();
                 FragmentEqualizer fragmentequalizer = new FragmentEqualizer();
                 fragmentTransaction.replace(R.id.fragment, fragmentequalizer);
@@ -598,7 +598,7 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
                 fragmentTransaction.replace(R.id.fragment, fragmentfeedback);
                 fragmentTransaction.commit();
                 toolbar.setTitle("Send feedback");
-                break;
+                break;*/
         }
     }
 
