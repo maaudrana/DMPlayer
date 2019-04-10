@@ -8,7 +8,7 @@ package com.loitp.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * RecyclerView.Adapter that manages a Cursor, comparable to the CursorAdapter

@@ -7,7 +7,7 @@ package com.loitp.uicomponent;
 
 import com.nineoldandroids.view.ViewHelper;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public class ToolbarHidingOnScrollListener extends RecyclerView.OnScrollListener {

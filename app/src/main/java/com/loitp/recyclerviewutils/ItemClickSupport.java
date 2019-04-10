@@ -5,7 +5,7 @@
  */
 package com.loitp.recyclerviewutils;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.HapticFeedbackConstants;
 import android.view.SoundEffectConstants;
 import android.view.View;

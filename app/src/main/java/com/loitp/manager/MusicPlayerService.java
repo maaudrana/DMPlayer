@@ -17,7 +17,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.RemoteControlClient;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;

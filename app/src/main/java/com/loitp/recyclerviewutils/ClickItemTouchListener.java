@@ -7,9 +7,9 @@ package com.loitp.recyclerviewutils;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnItemTouchListener;
+import androidx.core.view.MotionEventCompat;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
