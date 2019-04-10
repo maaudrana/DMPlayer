@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dmplayer.observablelib.ObservableScrollView
+    <com.loitp.observablelib.ObservableScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_below="@+id/anchor" />
         </RelativeLayout>
 
-    </com.dmplayer.observablelib.ObservableScrollView>
+    </com.loitp.observablelib.ObservableScrollView>
 
     <View
         android:layout_width="match_parent"

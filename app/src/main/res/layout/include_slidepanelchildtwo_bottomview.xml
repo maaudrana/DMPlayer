@@ -33,7 +33,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
 
-            <com.dmplayer.uicomponent.Slider
+            <com.loitp.uicomponent.Slider
                 android:id="@+id/audio_progress_control"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1">
 
-            <com.dmplayer.uicomponent.PlayPauseView
+            <com.loitp.uicomponent.PlayPauseView
                 android:id="@+id/btn_play"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

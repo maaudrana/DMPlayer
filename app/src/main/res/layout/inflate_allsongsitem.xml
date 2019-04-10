@@ -9,7 +9,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <com.dmplayer.uicomponent.CircleImageView
+    <com.loitp.uicomponent.CircleImageView
         android:id="@+id/inflate_allsong_imgSongThumb"
         android:layout_width="48dp"
         android:layout_height="48dp"
