@@ -413,6 +413,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
                 @Override
                 public void onClick(View v) {
                     try {
+                        //TODO
                         PopupMenu popup = new PopupMenu(context, v);
                         popup.getMenuInflater().inflate(R.menu.list_item_option, popup.getMenu());
                         popup.show();

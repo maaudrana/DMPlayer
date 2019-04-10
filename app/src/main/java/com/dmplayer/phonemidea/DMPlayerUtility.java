@@ -27,7 +27,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
-import com.dmplayer.ApplicationDMPlayer;
+import com.dmplayer.LApplication;
 import com.dmplayer.R;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
@@ -255,9 +255,9 @@ public class DMPlayerUtility {
 
     public static void runOnUIThread(Runnable runnable, long delay) {
         if (delay == 0) {
-            ApplicationDMPlayer.applicationHandler.post(runnable);
+            LApplication.applicationHandler.post(runnable);
         } else {
-            ApplicationDMPlayer.applicationHandler.postDelayed(runnable, delay);
+            LApplication.applicationHandler.postDelayed(runnable, delay);
         }
     }
 
@@ -265,7 +265,7 @@ public class DMPlayerUtility {
         if (value == 0) {
             return 0;
         }
-        return (int) Math.ceil(ApplicationDMPlayer.density * value);
+        return (int) Math.ceil(LApplication.density * value);
     }
 
 

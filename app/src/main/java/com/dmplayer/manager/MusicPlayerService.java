@@ -24,7 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.dmplayer.ApplicationDMPlayer;
+import com.dmplayer.LApplication;
 import com.dmplayer.R;
 import com.dmplayer.activities.DMPlayerBaseActivity;
 import com.dmplayer.models.SongDetail;
@@ -136,10 +136,10 @@ public class MusicPlayerService extends Service implements AudioManager.OnAudioF
                 expandedView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.player_big_notification);
             }
 
-            Intent intent = new Intent(ApplicationDMPlayer.applicationContext, DMPlayerBaseActivity.class);
+            Intent intent = new Intent(LApplication.applicationContext, DMPlayerBaseActivity.class);
             intent.setAction("openplayer");
             intent.setFlags(32768);
-            PendingIntent contentIntent = PendingIntent.getActivity(ApplicationDMPlayer.applicationContext, 0, intent, 0);
+            PendingIntent contentIntent = PendingIntent.getActivity(LApplication.applicationContext, 0, intent, 0);
 
             Notification notification = new NotificationCompat.Builder(getApplicationContext()).setSmallIcon(R.drawable.player)
                     .setContentIntent(contentIntent).setContentTitle(songName).build();
@@ -154,7 +154,7 @@ public class MusicPlayerService extends Service implements AudioManager.OnAudioF
                 setListeners(expandedView);
             }
 
-            Bitmap albumArt = audioInfo != null ? audioInfo.getSmallCover(ApplicationDMPlayer.applicationContext) : null;
+            Bitmap albumArt = audioInfo != null ? audioInfo.getSmallCover(LApplication.applicationContext) : null;
 
             if (albumArt != null) {
                 notification.contentView.setImageViewBitmap(R.id.player_album_art, albumArt);
@@ -206,9 +206,9 @@ public class MusicPlayerService extends Service implements AudioManager.OnAudioF
                 RemoteControlClient.MetadataEditor metadataEditor = remoteControlClient.editMetadata(true);
                 metadataEditor.putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, authorName);
                 metadataEditor.putString(MediaMetadataRetriever.METADATA_KEY_TITLE, songName);
-                if (audioInfo != null && audioInfo.getCover(ApplicationDMPlayer.applicationContext) != null) {
+                if (audioInfo != null && audioInfo.getCover(LApplication.applicationContext) != null) {
                     metadataEditor.putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK,
-                            audioInfo.getCover(ApplicationDMPlayer.applicationContext));
+                            audioInfo.getCover(LApplication.applicationContext));
                 }
                 metadataEditor.apply();
                 audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);

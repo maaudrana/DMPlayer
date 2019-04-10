@@ -25,7 +25,7 @@ import java.util.ArrayList;
 //TODO add base master
 //TODO add admob
 //TODO string
-public class ApplicationDMPlayer extends Application {
+public class LApplication extends Application {
     public ArrayList<SongDetail> songsList = new ArrayList<SongDetail>();
     public static Context applicationContext = null;
     public static volatile Handler applicationHandler = null;
@@ -111,7 +111,7 @@ public class ApplicationDMPlayer extends Application {
 
     private void initilizeDB() {
         if (DB_HELPER == null) {
-            DB_HELPER = new DMPLayerDBHelper(ApplicationDMPlayer.this);
+            DB_HELPER = new DMPLayerDBHelper(LApplication.this);
         }
         try {
             DB_HELPER.getWritableDatabase();

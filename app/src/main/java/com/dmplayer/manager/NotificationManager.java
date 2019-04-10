@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.util.SparseArray;
 
-import com.dmplayer.ApplicationDMPlayer;
-import com.dmplayer.models.SongDetail;
+import com.dmplayer.LApplication;
 
 public class NotificationManager {
 
@@ -87,7 +86,7 @@ public class NotificationManager {
 
     public void postNotificationNameInternal(int id, boolean allowDuringAnimation, Object... args) {
         if (DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationDMPlayer.applicationHandler.getLooper().getThread()) {
+            if (Thread.currentThread() != LApplication.applicationHandler.getLooper().getThread()) {
                 throw new RuntimeException("postNotificationName allowed only from MAIN thread");
             }
         }
@@ -134,7 +133,7 @@ public class NotificationManager {
 
     public void addObserver(Object observer, int id) {
         if (DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationDMPlayer.applicationHandler.getLooper().getThread()) {
+            if (Thread.currentThread() != LApplication.applicationHandler.getLooper().getThread()) {
                 throw new RuntimeException("addObserver allowed only from MAIN thread");
             }
         }
@@ -159,7 +158,7 @@ public class NotificationManager {
 
     public void removeObserver(Object observer, int id) {
         if (DEBUG_VERSION) {
-            if (Thread.currentThread() != ApplicationDMPlayer.applicationHandler.getLooper().getThread()) {
+            if (Thread.currentThread() != LApplication.applicationHandler.getLooper().getThread()) {
                 throw new RuntimeException("removeObserver allowed only from MAIN thread");
             }
         }

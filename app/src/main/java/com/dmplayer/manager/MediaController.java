@@ -20,7 +20,7 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.view.View;
 
-import com.dmplayer.ApplicationDMPlayer;
+import com.dmplayer.LApplication;
 import com.dmplayer.dbhandler.FavoritePlayTableHelper;
 import com.dmplayer.dbhandler.MostAndRecentPlayTableHelper;
 import com.dmplayer.models.SongDetail;
@@ -237,14 +237,14 @@ public class MediaController implements NotificationManager.NotificationCenterDe
         }
 
         if (MusicPreferance.playingSongDetail != null) {
-            Intent intent = new Intent(ApplicationDMPlayer.applicationContext, MusicPlayerService.class);
-            ApplicationDMPlayer.applicationContext.startService(intent);
+            Intent intent = new Intent(LApplication.applicationContext, MusicPlayerService.class);
+            LApplication.applicationContext.startService(intent);
         } else {
-            Intent intent = new Intent(ApplicationDMPlayer.applicationContext, MusicPlayerService.class);
-            ApplicationDMPlayer.applicationContext.stopService(intent);
+            Intent intent = new Intent(LApplication.applicationContext, MusicPlayerService.class);
+            LApplication.applicationContext.stopService(intent);
         }
 
-        storeResendPlay(ApplicationDMPlayer.applicationContext, mSongDetail);
+        storeResendPlay(LApplication.applicationContext, mSongDetail);
         NotificationManager.getInstance().notifyNewSongLoaded(NotificationManager.newaudioloaded, mSongDetail);
 
         return true;
@@ -380,8 +380,8 @@ public class MediaController implements NotificationManager.NotificationCenterDe
         stopProgressTimer();
         isPaused = false;
 
-        Intent intent = new Intent(ApplicationDMPlayer.applicationContext, MusicPlayerService.class);
-        ApplicationDMPlayer.applicationContext.stopService(intent);
+        Intent intent = new Intent(LApplication.applicationContext, MusicPlayerService.class);
+        LApplication.applicationContext.stopService(intent);
     }
 
     private void startProgressTimer() {
@@ -570,8 +570,8 @@ public class MediaController implements NotificationManager.NotificationCenterDe
         stopProgressTimer();
         isPaused = true;
         if (stopService) {
-            Intent intent = new Intent(ApplicationDMPlayer.applicationContext, MusicPlayerService.class);
-            ApplicationDMPlayer.applicationContext.stopService(intent);
+            Intent intent = new Intent(LApplication.applicationContext, MusicPlayerService.class);
+            LApplication.applicationContext.stopService(intent);
         }
     }
 

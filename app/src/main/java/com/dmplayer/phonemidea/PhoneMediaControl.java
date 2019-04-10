@@ -16,7 +16,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.dmplayer.ApplicationDMPlayer;
+import com.dmplayer.LApplication;
 import com.dmplayer.dbhandler.FavoritePlayTableHelper;
 import com.dmplayer.dbhandler.MostAndRecentPlayTableHelper;
 import com.dmplayer.manager.MediaController;
@@ -207,9 +207,9 @@ public class PhoneMediaControl {
 
     public static void runOnUIThread(Runnable runnable, long delay) {
         if (delay == 0) {
-            ApplicationDMPlayer.applicationHandler.post(runnable);
+            LApplication.applicationHandler.post(runnable);
         } else {
-            ApplicationDMPlayer.applicationHandler.postDelayed(runnable, delay);
+            LApplication.applicationHandler.postDelayed(runnable, delay);
         }
     }
 
