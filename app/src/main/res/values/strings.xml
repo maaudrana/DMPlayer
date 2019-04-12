@@ -17,6 +17,7 @@
         <item>Rate app</item>
         <item>More app</item>
         <item>Github</item>
+        <item>Donation</item>
     </string-array>
     <array name="drawerIcons">
         <item>@drawable/ic_allsongs</item>
@@ -29,6 +30,7 @@
         <item>@drawable/baseline_rate_review_black_48</item>
         <item>@drawable/baseline_shop_black_48</item>
         <item>@drawable/baseline_copyright_black_48</item>
+        <item>@drawable/baseline_credit_card_black_48</item>
     </array>
 
 </resources>

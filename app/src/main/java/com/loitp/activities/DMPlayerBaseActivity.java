@@ -65,6 +65,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.loitp.core.base.BaseFontActivity;
+import vn.loitp.core.loitp.donate.FrmDonate;
 import vn.loitp.core.utilities.LSocialUtil;
 import vn.loitp.utils.util.AppUtils;
 
@@ -611,6 +612,13 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
                 break;
             case 6:
                 LSocialUtil.openUrlInBrowser(activity, "https://github.com/tplloi/DMPlayer");
+                break;
+            case 7:
+                sharedPreferences.edit().putInt("FRAGMENT", position).apply();
+                FrmDonate frmDonate = new FrmDonate();
+                fragmentTransaction.replace(R.id.fragment, frmDonate);
+                fragmentTransaction.commit();
+                toolbar.setTitle("Donation");
                 break;
         }
     }
