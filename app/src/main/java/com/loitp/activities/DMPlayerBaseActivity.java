@@ -118,20 +118,12 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
             activity = this;
         }
         theme();
-
-        //Set your Layout view
         super.onCreate(savedInstanceState);
-
-        //System bar color set
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            systembartiteniam();
-        }
-
+        isShowAdWhenExit = false;
         toolbarStatusBar();
         navigationDrawer();
         initiSlidingUpPanel();
         setFragment(0);
-
         getIntentData();
     }
 

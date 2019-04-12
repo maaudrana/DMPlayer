@@ -32,5 +32,6 @@
         <item>@drawable/baseline_copyright_black_48</item>
         <item>@drawable/baseline_credit_card_black_48</item>
     </array>
-
+    <string name="str_b">ca-app-pub-3165963943681013/9145172486</string>
+    <string name="str_f">ca-app-pub-3165963943681013/9183511569</string>
 </resources>

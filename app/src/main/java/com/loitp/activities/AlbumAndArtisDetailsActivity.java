@@ -89,12 +89,10 @@ public class AlbumAndArtisDetailsActivity extends BaseFontActivity implements Vi
             activity = this;
         }
         theme();
-        //Set your Layout view
         super.onCreate(savedInstanceState);
-
+        isShowAdWhenExit = false;
         initialize();
         getBundleValuse();
-
         initiSlidingUpPanel();
         loadAlreadyPaing();
         addObserver();

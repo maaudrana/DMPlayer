@@ -47,6 +47,7 @@ public class MusicChooserActivity extends BaseFontActivity {
         }
         theme();
         super.onCreate(savedInstanceState);
+        isShowAdWhenExit = false;
         initialize();
         loadAllSongs();
     }

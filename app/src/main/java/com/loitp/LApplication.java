@@ -67,7 +67,7 @@ public class LApplication extends MultiDexApplication {
         Constants.setIsDebug(true);
         Utils.init(this);
         //config admob id
-        //AdmobData.getInstance().setIdAdmobFull(getString(R.string.str_f));
+        AdmobData.getInstance().setIdAdmobFull(getString(R.string.str_f));
         //config activity transition default
         ActivityData.getInstance().setType(Constants.TYPE_ACTIVITY_TRANSITION_FADE);
         //ActivityData.getInstance().setType(Constants.TYPE_ACTIVITY_TRANSITION_SLIDELEFT);
