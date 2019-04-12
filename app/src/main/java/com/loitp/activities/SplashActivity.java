@@ -32,7 +32,7 @@ public class SplashActivity extends BaseFontActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView tv = (TextView) findViewById(R.id.tv);
-        tv.setText("Version " + AppUtils.getAppPackageName());
+        tv.setText("Version " + AppUtils.getAppVersionName());
         LUIUtil.setDelay(2000, new LUIUtil.DelayCallback() {
             @Override
             public void doAfter(int mls) {
