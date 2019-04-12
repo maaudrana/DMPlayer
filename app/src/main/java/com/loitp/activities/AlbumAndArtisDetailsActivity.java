@@ -12,10 +12,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -28,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.loitp.R;
 import com.loitp.manager.MediaController;
 import com.loitp.manager.MusicPreferance;
@@ -57,7 +54,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements View.OnClickListener, ObservableScrollViewCallbacks, Slider.OnValueChangedListener,
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
+import vn.loitp.core.base.BaseFontActivity;
+
+public class AlbumAndArtisDetailsActivity extends BaseFontActivity implements View.OnClickListener, ObservableScrollViewCallbacks, Slider.OnValueChangedListener,
         NotificationManager.NotificationCenterDelegate {
 
     private View mToolbarView;
@@ -66,7 +67,6 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
 
     private SharedPreferences sharedPreferences;
     private int color = 0xFFFFFF;
-    private Context context;
 
     private long id = -1;
     private long tagFor = -1;
@@ -85,12 +85,12 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Set your theme first
-        context = AlbumAndArtisDetailsActivity.this;
+        if (activity == null) {
+            activity = this;
+        }
         theme();
         //Set your Layout view
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_albumandartisdetails);
 
         initialize();
         getBundleValuse();
@@ -129,6 +129,21 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
     }
 
     @Override
+    protected boolean setFullScreen() {
+        return true;
+    }
+
+    @Override
+    protected String setTag() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    protected int setLayoutResourceId() {
+        return R.layout.activity_albumandartisdetails;
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
@@ -155,21 +170,21 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
             case R.id.btn_suffel:
                 v.setSelected(v.isSelected() ? false : true);
                 MediaController.getInstance().shuffleMusic = v.isSelected() ? true : false;
-                MusicPreferance.setShuffel(context, (v.isSelected() ? true : false));
+                MusicPreferance.setShuffel(activity, (v.isSelected() ? true : false));
                 MediaController.getInstance().shuffleList(MusicPreferance.playlist);
-                DMPlayerUtility.changeColorSet(context, (ImageView) v, v.isSelected());
+                DMPlayerUtility.changeColorSet(activity, (ImageView) v, v.isSelected());
                 break;
 
             case R.id.btn_toggle:
                 v.setSelected(v.isSelected() ? false : true);
                 MediaController.getInstance().repeatMode = v.isSelected() ? 1 : 0;
-                MusicPreferance.setRepeat(context, (v.isSelected() ? 1 : 0));
-                DMPlayerUtility.changeColorSet(context, (ImageView) v, v.isSelected());
+                MusicPreferance.setRepeat(activity, (v.isSelected() ? 1 : 0));
+                DMPlayerUtility.changeColorSet(activity, (ImageView) v, v.isSelected());
                 break;
 
             case R.id.bottombar_img_Favorite:
                 if (MediaController.getInstance().getPlayingSongDetail() != null) {
-                    MediaController.getInstance().storeFavoritePlay(context, MediaController.getInstance().getPlayingSongDetail(), v.isSelected() ? 0 : 1);
+                    MediaController.getInstance().storeFavoritePlay(activity, MediaController.getInstance().getPlayingSongDetail(), v.isSelected() ? 0 : 1);
                     v.setSelected(v.isSelected() ? false : true);
                     DMPlayerUtility.animateHeartButton(v);
                     findViewById(R.id.ivLike).setSelected(v.isSelected() ? true : false);
@@ -208,7 +223,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
     public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         int theme = sharedPreferences.getInt("THEME", 0);
-        DMPlayerUtility.settingTheme(context, theme);
+        DMPlayerUtility.settingTheme(activity, theme);
     }
 
     private void initialize() {
@@ -236,7 +251,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
         tv_title_fst = (TextView) findViewById(R.id.tv_title_frst);
         tv_title_sec = (TextView) findViewById(R.id.tv_title_sec);
         recycler_songslist = (ExpandableHeightListView) findViewById(R.id.recycler_allSongs);
-        mAllSongsListAdapter = new AllSongsListAdapter(context);
+        mAllSongsListAdapter = new AllSongsListAdapter(activity);
         recycler_songslist.setAdapter(mAllSongsListAdapter);
 
         options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.bg_default_album_art)
@@ -294,7 +309,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
                 }
             }
         });
-        mPhoneMediaControl.loadMusicList(context, id, PhoneMediaControl.SonLoadFor.Album, "");
+        mPhoneMediaControl.loadMusicList(activity, id, PhoneMediaControl.SonLoadFor.Album, "");
 
         String contentURI = "content://media/external/audio/albumart/" + id;
         imageLoader.displayImage(contentURI, banner, options);
@@ -314,7 +329,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
                 }
             }
         });
-        mPhoneMediaControl.loadMusicList(context, id, PhoneMediaControl.SonLoadFor.Artis, "");
+        mPhoneMediaControl.loadMusicList(activity, id, PhoneMediaControl.SonLoadFor.Artis, "");
     }
 
     private void loadGenersSongs(long id) {
@@ -332,7 +347,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
                 }
             }
         });
-        mPhoneMediaControl.loadMusicList(context, id, PhoneMediaControl.SonLoadFor.Gener, "");
+        mPhoneMediaControl.loadMusicList(activity, id, PhoneMediaControl.SonLoadFor.Gener, "");
     }
 
 
@@ -559,13 +574,13 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
         ((PlayPauseView) findViewById(R.id.bottombar_play)).setOnClickListener(this);
         ((PlayPauseView) findViewById(R.id.btn_play)).setOnClickListener(this);
 
-        imgbtn_toggle.setSelected((MusicPreferance.getRepeat(context) == 1) ? true : false);
+        imgbtn_toggle.setSelected((MusicPreferance.getRepeat(activity) == 1) ? true : false);
         MediaController.getInstance().shuffleMusic = imgbtn_toggle.isSelected() ? true : false;
-        DMPlayerUtility.changeColorSet(context, (ImageView) imgbtn_toggle, imgbtn_toggle.isSelected());
+        DMPlayerUtility.changeColorSet(activity, (ImageView) imgbtn_toggle, imgbtn_toggle.isSelected());
 
-        imgbtn_suffel.setSelected(MusicPreferance.getShuffel(context) ? true : false);
+        imgbtn_suffel.setSelected(MusicPreferance.getShuffel(activity) ? true : false);
         MediaController.getInstance().repeatMode = imgbtn_suffel.isSelected() ? 1 : 0;
-        DMPlayerUtility.changeColorSet(context, (ImageView) imgbtn_suffel, imgbtn_suffel.isSelected());
+        DMPlayerUtility.changeColorSet(activity, (ImageView) imgbtn_suffel, imgbtn_suffel.isSelected());
 
         mLayout.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
             @Override
@@ -636,7 +651,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
         if (mSongDetail != null) {
             loadSongsDetails(mSongDetail);
             updateTitle(false);
-            MediaController.getInstance().checkIsFavorite(context, mSongDetail, img_Favorite);
+            MediaController.getInstance().checkIsFavorite(activity, mSongDetail, img_Favorite);
         }
     }
 
@@ -705,7 +720,7 @@ public class AlbumAndArtisDetailsActivity extends AppCompatActivity implements V
 
     @Override
     public void newSongLoaded(Object... args) {
-        MediaController.getInstance().checkIsFavorite(context, (SongDetail) args[0], img_Favorite);
+        MediaController.getInstance().checkIsFavorite(activity, (SongDetail) args[0], img_Favorite);
     }
 
 

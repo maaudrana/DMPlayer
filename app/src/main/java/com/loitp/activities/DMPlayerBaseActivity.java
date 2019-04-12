@@ -14,14 +14,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -65,12 +57,19 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import vn.loitp.core.base.BaseFontActivity;
 
-public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnClickListener, Slider.OnValueChangedListener,
+
+public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnClickListener, Slider.OnValueChangedListener,
         NotificationManager.NotificationCenterDelegate {
 
-    private static final String TAG = "ActivityDMPlayerBase";
-    private Context context;
     private SharedPreferences sharedPreferences;
     private ActionBarDrawerToggle mDrawerToggle;
     private int theme;
@@ -112,13 +111,13 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Set your theme first
-        context = DMPlayerBaseActivity.this;
+        if (activity == null) {
+            activity = this;
+        }
         theme();
 
         //Set your Layout view
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dmplayerbase);
 
         //System bar color set
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -150,9 +149,24 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
     protected void onDestroy() {
         removeObserver();
         if (MediaController.getInstance().isAudioPaused()) {
-            MediaController.getInstance().cleanupPlayer(context, true, true);
+            MediaController.getInstance().cleanupPlayer(activity, true, true);
         }
         super.onDestroy();
+    }
+
+    @Override
+    protected boolean setFullScreen() {
+        return true;
+    }
+
+    @Override
+    protected String setTag() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    protected int setLayoutResourceId() {
+        return R.layout.activity_dmplayerbase;
     }
 
     @Override
@@ -193,21 +207,21 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_suffel:
                 v.setSelected(v.isSelected() ? false : true);
                 MediaController.getInstance().shuffleMusic = v.isSelected() ? true : false;
-                MusicPreferance.setShuffel(context, (v.isSelected() ? true : false));
+                MusicPreferance.setShuffel(activity, (v.isSelected() ? true : false));
                 MediaController.getInstance().shuffleList(MusicPreferance.playlist);
-                DMPlayerUtility.changeColorSet(context, (ImageView) v, v.isSelected());
+                DMPlayerUtility.changeColorSet(activity, (ImageView) v, v.isSelected());
                 break;
 
             case R.id.btn_toggle:
                 v.setSelected(v.isSelected() ? false : true);
                 MediaController.getInstance().repeatMode = v.isSelected() ? 1 : 0;
-                MusicPreferance.setRepeat(context, (v.isSelected() ? 1 : 0));
-                DMPlayerUtility.changeColorSet(context, (ImageView) v, v.isSelected());
+                MusicPreferance.setRepeat(activity, (v.isSelected() ? 1 : 0));
+                DMPlayerUtility.changeColorSet(activity, (ImageView) v, v.isSelected());
                 break;
 
             case R.id.bottombar_img_Favorite:
                 if (MediaController.getInstance().getPlayingSongDetail() != null) {
-                    MediaController.getInstance().storeFavoritePlay(context, MediaController.getInstance().getPlayingSongDetail(), v.isSelected() ? 0 : 1);
+                    MediaController.getInstance().storeFavoritePlay(activity, MediaController.getInstance().getPlayingSongDetail(), v.isSelected() ? 0 : 1);
                     v.setSelected(v.isSelected() ? false : true);
                     DMPlayerUtility.animateHeartButton(v);
                     findViewById(R.id.ivLike).setSelected(v.isSelected() ? true : false);
@@ -230,8 +244,8 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
                 if (data.getScheme().equalsIgnoreCase("file")) {
                     String path = data.getPath().toString();
                     if (!TextUtils.isEmpty(path)) {
-                        MediaController.getInstance().cleanupPlayer(context, true, true);
-                        MusicPreferance.getPlaylist(context, path);
+                        MediaController.getInstance().cleanupPlayer(activity, true, true);
+                        MusicPreferance.getPlaylist(activity, path);
                         updateTitle(false);
                         MediaController.getInstance().playAudio(MusicPreferance.playingSongDetail);
                         mLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
@@ -465,13 +479,13 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
         ((PlayPauseView) findViewById(R.id.bottombar_play)).setOnClickListener(this);
         ((PlayPauseView) findViewById(R.id.btn_play)).setOnClickListener(this);
 
-        imgbtn_toggle.setSelected((MusicPreferance.getRepeat(context) == 1) ? true : false);
+        imgbtn_toggle.setSelected((MusicPreferance.getRepeat(activity) == 1) ? true : false);
         MediaController.getInstance().shuffleMusic = imgbtn_toggle.isSelected() ? true : false;
-        DMPlayerUtility.changeColorSet(context, (ImageView) imgbtn_toggle, imgbtn_toggle.isSelected());
+        DMPlayerUtility.changeColorSet(activity, (ImageView) imgbtn_toggle, imgbtn_toggle.isSelected());
 
-        imgbtn_suffel.setSelected(MusicPreferance.getShuffel(context) ? true : false);
+        imgbtn_suffel.setSelected(MusicPreferance.getShuffel(activity) ? true : false);
         MediaController.getInstance().repeatMode = imgbtn_suffel.isSelected() ? 1 : 0;
-        DMPlayerUtility.changeColorSet(context, (ImageView) imgbtn_suffel, imgbtn_suffel.isSelected());
+        DMPlayerUtility.changeColorSet(activity, (ImageView) imgbtn_suffel, imgbtn_suffel.isSelected());
 
         MediaController.getInstance().shuffleList(MusicPreferance.playlist);
 
@@ -596,7 +610,7 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
     public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         theme = sharedPreferences.getInt("THEME", 0);
-        DMPlayerUtility.settingTheme(context, theme);
+        DMPlayerUtility.settingTheme(activity, theme);
     }
 
     private void loadImageLoaderOption() {
@@ -624,12 +638,12 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void loadAlreadyPlayng() {
-        SongDetail mSongDetail = MusicPreferance.getLastSong(context);
-        ArrayList<SongDetail> playlist = MusicPreferance.getPlaylist(context);
+        SongDetail mSongDetail = MusicPreferance.getLastSong(activity);
+        ArrayList<SongDetail> playlist = MusicPreferance.getPlaylist(activity);
         if (mSongDetail != null) {
             updateTitle(false);
         }
-        MediaController.getInstance().checkIsFavorite(context, mSongDetail, img_Favorite);
+        MediaController.getInstance().checkIsFavorite(activity, mSongDetail, img_Favorite);
     }
 
     public void addObserver() {
@@ -679,7 +693,7 @@ public class DMPlayerBaseActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void newSongLoaded(Object... args) {
-        MediaController.getInstance().checkIsFavorite(context, (SongDetail) args[0], img_Favorite);
+        MediaController.getInstance().checkIsFavorite(activity, (SongDetail) args[0], img_Favorite);
     }
 
 

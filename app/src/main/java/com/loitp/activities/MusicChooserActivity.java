@@ -11,8 +11,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +29,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
-public class MusicChooserActivity extends AppCompatActivity {
+import androidx.appcompat.widget.Toolbar;
+import vn.loitp.core.base.BaseFontActivity;
 
+public class MusicChooserActivity extends BaseFontActivity {
     private SharedPreferences sharedPreferences;
     private int color = 0xFFFFFF;
-    private Context context;
 
     private ListView recycler_songslist;
     private AllSongsListAdapter mAllSongsListAdapter;
@@ -43,13 +42,11 @@ public class MusicChooserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Set your theme first
-        context = MusicChooserActivity.this;
+        if (activity == null) {
+            activity = this;
+        }
         theme();
-        //Set your Layout view
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_musicchooser);
-
         initialize();
         loadAllSongs();
     }
@@ -66,12 +63,26 @@ public class MusicChooserActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected boolean setFullScreen() {
+        return true;
+    }
+
+    @Override
+    protected String setTag() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
+    protected int setLayoutResourceId() {
+        return R.layout.activity_musicchooser;
+    }
 
     //Catch  theme changed from settings
     public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         int theme = sharedPreferences.getInt("THEME", 0);
-        DMPlayerUtility.settingTheme(context, theme);
+        DMPlayerUtility.settingTheme(activity, theme);
     }
 
     private void initialize() {
@@ -81,7 +92,7 @@ public class MusicChooserActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         recycler_songslist = (ListView) findViewById(R.id.recycler_allSongs);
-        mAllSongsListAdapter = new AllSongsListAdapter(context);
+        mAllSongsListAdapter = new AllSongsListAdapter(activity);
         recycler_songslist.setAdapter(mAllSongsListAdapter);
     }
 
@@ -95,7 +106,7 @@ public class MusicChooserActivity extends AppCompatActivity {
                 mAllSongsListAdapter.notifyDataSetChanged();
             }
         });
-        mPhoneMediaControl.loadMusicList(context, -1, PhoneMediaControl.SonLoadFor.All, "");
+        mPhoneMediaControl.loadMusicList(activity, -1, PhoneMediaControl.SonLoadFor.All, "");
     }
 
     public class AllSongsListAdapter extends BaseAdapter {
