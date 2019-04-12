@@ -5,7 +5,6 @@
  */
 package com.loitp;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
@@ -31,9 +30,6 @@ import vn.loitp.data.ActivityData;
 import vn.loitp.data.AdmobData;
 import vn.loitp.utils.util.Utils;
 
-//TODO add base master
-//TODO add admob
-//TODO string
 public class LApplication extends MultiDexApplication {
     public ArrayList<SongDetail> songsList = new ArrayList<SongDetail>();
     public static Context applicationContext = null;
@@ -64,7 +60,7 @@ public class LApplication extends MultiDexApplication {
          */
         initImageLoader(applicationContext);
 
-        Constants.setIsDebug(true);
+        Constants.setIsDebug(false);
         Utils.init(this);
         //config admob id
         AdmobData.getInstance().setIdAdmobFull(getString(R.string.str_f));
