@@ -12,10 +12,11 @@
         <item>Favorite</item>
         <!-- after divider -->
         <item>Settings</item>
-
         <!--<item>Equilizer</item>-->
         <!--<item>Send feedback</item>-->
-
+        <item>Rate app</item>
+        <item>More app</item>
+        <item>Github</item>
     </string-array>
     <array name="drawerIcons">
         <item>@drawable/ic_allsongs</item>
@@ -25,6 +26,9 @@
         <item>@drawable/ic_settings</item>
         <!--<item>@drawable/ic_equalizer</item>-->
         <!--<item>@drawable/ic_content_send</item>-->
+        <item>@drawable/baseline_rate_review_black_48</item>
+        <item>@drawable/baseline_shop_black_48</item>
+        <item>@drawable/baseline_copyright_black_48</item>
     </array>
 
 </resources>

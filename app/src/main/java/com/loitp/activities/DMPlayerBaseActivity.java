@@ -65,6 +65,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.loitp.core.base.BaseFontActivity;
+import vn.loitp.core.utilities.LSocialUtil;
+import vn.loitp.utils.util.AppUtils;
 
 
 public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnClickListener, Slider.OnValueChangedListener,
@@ -579,7 +581,6 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
                 fragmentTransaction.commit();
                 toolbar.setTitle("Favorite");
                 break;
-
             case 3:
                 sharedPreferences.edit().putInt("FRAGMENT", position).apply();
                 FragmentSettings fragmentsettings = new FragmentSettings();
@@ -587,7 +588,6 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
                 fragmentTransaction.commit();
                 toolbar.setTitle("Settings");
                 break;
-
             /*case 4:
                 sharedPreferences.edit().putInt("FRAGMENT", position).apply();
                 FragmentEqualizer fragmentequalizer = new FragmentEqualizer();
@@ -603,6 +603,15 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
                 fragmentTransaction.commit();
                 toolbar.setTitle("Send feedback");
                 break;*/
+            case 4:
+                LSocialUtil.rateApp(activity, AppUtils.getAppPackageName());
+                break;
+            case 5:
+                LSocialUtil.moreApp(activity);
+                break;
+            case 6:
+                LSocialUtil.openUrlInBrowser(activity, "https://github.com/tplloi/DMPlayer");
+                break;
         }
     }
 
