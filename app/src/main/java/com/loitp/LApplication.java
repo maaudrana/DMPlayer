@@ -13,6 +13,8 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.github.piasy.biv.BigImageViewer;
+import com.github.piasy.biv.loader.glide.GlideImageLoader;
 import com.loitp.dbhandler.DMPLayerDBHelper;
 import com.loitp.models.SongDetail;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -21,6 +23,12 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.util.ArrayList;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import vn.loitp.core.common.Constants;
+import vn.loitp.data.ActivityData;
+import vn.loitp.data.AdmobData;
+import vn.loitp.utils.util.Utils;
 
 //TODO add base master
 //TODO add admob
@@ -54,6 +62,28 @@ public class LApplication extends Application {
          * Imageloader initialize
          */
         initImageLoader(applicationContext);
+
+        Constants.setIsDebug(true);
+        Utils.init(this);
+        //config admob id
+        //AdmobData.getInstance().setIdAdmobFull(getString(R.string.str_f));
+        //config activity transition default
+        ActivityData.getInstance().setType(Constants.TYPE_ACTIVITY_TRANSITION_FADE);
+        //ActivityData.getInstance().setType(Constants.TYPE_ACTIVITY_TRANSITION_SLIDELEFT);
+        //ActivityData.getInstance().setType(Constants.TYPE_ACTIVITY_TRANSITION_SLIDEUP);
+
+        //config font
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath(vn.loitp.core.common.Constants.FONT_PATH)
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
+        //fcm
+        //FirebaseMessaging.getInstance().subscribeToTopic(Constants.FCM_TOPIC);
+
+        //big imageview
+        BigImageViewer.initialize(GlideImageLoader.with(getApplicationContext()));
     }
 
     @Override
