@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -10,6 +12,10 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
+        multiDexEnabled true
+
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true    // Enable RS support
     }
     buildTypes {
         release {
@@ -24,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.tplloi:basemaster:3.5.4'
+    api 'com.github.tplloi:basemaster:3.5.4'
     //api fileTree(dir: 'libs', include: ['*.jar'])
     //api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/universal-image-loader-1.9.3.jar')
@@ -34,4 +40,9 @@ dependencies {
     //api 'androidx.cardview:cardview:1.0.0-beta01'
     //api 'androidx.recyclerview:recyclerview:1.0.0-beta01'
     api 'com.sothree.slidinguppanel:library:3.4.0'
+    /*implementation ('com.sothree.slidinguppanel:library:3.4.0') {
+        exclude group: "com.android.support"
+    }*/
+    //api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-beta01'
 }

@@ -7,7 +7,6 @@
 
     <!-- The toolbar and main content view -->
     <include
-        android:id="@+id/include_sliding_panel"
         layout="@layout/include_slidingup_panellayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

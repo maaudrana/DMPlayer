@@ -3,13 +3,13 @@
     <declare-styleable name="ScrimInsetsView">
         <attr name="insetForeground_ui" format="reference|color" />
     </declare-styleable>
-    <declare-styleable name="SwipeRefreshLayout">
+    <!--<declare-styleable name="SwipeRefreshLayout">
         <attr name="direction">
             <enum name="top" value="0" />
             <enum name="bottom" value="1" />
             <enum name="both" value="2" />
         </attr>
-    </declare-styleable>
+    </declare-styleable>-->
     <declare-styleable name="PagerSlidingTabStrip">
         <attr name="pstsIndicatorColor" format="color" />
         <attr name="pstsUnderlineColor" format="color" />
@@ -38,13 +38,7 @@
         <attr name="pstsTextSelectedAlpha" format="float" />
     </declare-styleable>
     <bool name="fitsSystemWindows">false</bool>
-    <dimen name="statusBarHeight">0dp</dimen>
-    <dimen name="space">0dp</dimen>
     <color name="inset">#0000</color>
-
-    <style name="statusBarVisibility">
-        <item name="android:visibility">gone</item>
-    </style>
 
     <!-- SlidingUpPanelLayout -->
     <declare-styleable name="SlidingUpPanelLayout">

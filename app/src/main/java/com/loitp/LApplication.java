@@ -24,6 +24,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.util.ArrayList;
 
+import androidx.multidex.MultiDexApplication;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import vn.loitp.core.common.Constants;
 import vn.loitp.data.ActivityData;
@@ -33,7 +34,7 @@ import vn.loitp.utils.util.Utils;
 //TODO add base master
 //TODO add admob
 //TODO string
-public class LApplication extends Application {
+public class LApplication extends MultiDexApplication {
     public ArrayList<SongDetail> songsList = new ArrayList<SongDetail>();
     public static Context applicationContext = null;
     public static volatile Handler applicationHandler = null;

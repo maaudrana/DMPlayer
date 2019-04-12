@@ -19,7 +19,6 @@
         <!-- MAIN CONTENT -->
 
         <include
-            android:id="@+id/include_sliding_panelchildone"
             layout="@layout/include_slidingpanel_childone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -27,7 +26,6 @@
         <!-- SLIDING LAYOUT -->
 
         <include
-            android:id="@+id/include_sliding_panel_childtwo"
             layout="@layout/include_slidingpanel_childtwo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

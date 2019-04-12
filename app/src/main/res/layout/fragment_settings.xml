@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:background="@android:color/white" >
     <TextView
-        android:id="@+id/textViewAdvancedSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
@@ -27,7 +26,6 @@
         android:background="?attr/selectableItemBackground">
 
         <ImageView
-            android:id="@+id/imageViewPhone3"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -37,7 +35,6 @@
             android:tint="?attr/colorAccent" />
 
         <ImageView
-            android:id="@+id/imageViewPhone2"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -47,7 +44,6 @@
             android:tint="?attr/colorPrimary" />
 
         <ImageView
-            android:id="@+id/imageViewPhone"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -57,7 +53,6 @@
             android:tint="?attr/colorAccent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -66,7 +61,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -77,7 +71,6 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textViewThemeDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -90,7 +83,6 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
