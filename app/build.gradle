@@ -3,9 +3,16 @@ apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'loi'
+            keyPassword '04021993'
+            storeFile file('C:/Users/LENOVO/Desktop/loitp.musicplayer/key.jks')
+            storePassword '04021993'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-
     defaultConfig {
         applicationId "loitp.musicplayer"
         minSdkVersion 17
@@ -21,6 +28,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable false
         }
     }
     compileOptions {
