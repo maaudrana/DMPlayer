@@ -57,6 +57,7 @@ import java.util.List;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import vn.loitp.core.base.BaseFontActivity;
+import vn.loitp.core.utilities.LScreenUtil;
 
 public class AlbumAndArtisDetailsActivity extends BaseFontActivity implements View.OnClickListener, ObservableScrollViewCallbacks, Slider.OnValueChangedListener,
         NotificationManager.NotificationCenterDelegate {
@@ -90,6 +91,7 @@ public class AlbumAndArtisDetailsActivity extends BaseFontActivity implements Vi
         }
         theme();
         super.onCreate(savedInstanceState);
+        LScreenUtil.hideNavigationBar(activity);
         isShowAdWhenExit = false;
         initialize();
         getBundleValuse();

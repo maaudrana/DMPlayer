@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.widget.Toolbar;
 import vn.loitp.core.base.BaseFontActivity;
+import vn.loitp.core.utilities.LScreenUtil;
 
 public class MusicChooserActivity extends BaseFontActivity {
     private SharedPreferences sharedPreferences;
@@ -47,6 +48,7 @@ public class MusicChooserActivity extends BaseFontActivity {
         }
         theme();
         super.onCreate(savedInstanceState);
+        LScreenUtil.hideNavigationBar(activity);
         isShowAdWhenExit = false;
         initialize();
         loadAllSongs();

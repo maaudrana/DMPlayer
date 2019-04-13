@@ -52,6 +52,7 @@ public class SplashActivity extends BaseFontActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LScreenUtil.hideNavigationBar(activity);
         isShowAdWhenExit = false;
         interstitialAd = LUIUtil.createAdFull(activity);
         TextView tv = (TextView) findViewById(R.id.tv);

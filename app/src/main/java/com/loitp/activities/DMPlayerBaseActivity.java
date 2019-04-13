@@ -66,6 +66,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.loitp.core.base.BaseFontActivity;
 import vn.loitp.core.loitp.donate.FrmDonate;
+import vn.loitp.core.utilities.LScreenUtil;
 import vn.loitp.core.utilities.LSocialUtil;
 import vn.loitp.utils.util.AppUtils;
 
@@ -119,6 +120,7 @@ public class DMPlayerBaseActivity extends BaseFontActivity implements View.OnCli
         }
         theme();
         super.onCreate(savedInstanceState);
+        LScreenUtil.hideNavigationBar(activity);
         isShowAdWhenExit = false;
         toolbarStatusBar();
         navigationDrawer();
